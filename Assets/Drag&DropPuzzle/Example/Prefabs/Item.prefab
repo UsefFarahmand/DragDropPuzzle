@@ -46,6 +46,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 58bf41c05431c924f858c891874ea6a0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_Data:
+    m_Sprite: {fileID: 0}
+    m_Scale: {x: 1, y: 1, z: 1}
   m_Piece: {fileID: 1873124011704787162}
   m_Slot: {fileID: 1921241782987596528}
 --- !u!1001 &3521558457727629573

@@ -1,12 +1,20 @@
 ﻿using UnityEngine;
 
-namespace Lindon.MiniGame.Puzzle
+namespace Lindon.MiniGame.DragDropPuzzle
 {
+    /// <summary>
+    /// A MonoBehaviour that provides a puzzle piece.
+    /// </summary>
     [AddComponentMenu("MiniGame/Puzzle/Piece")]
     [RequireComponent(typeof(Collider2D))]
+    [RequireComponent(typeof(SpriteRenderer))]
     public class PuzzlePiece : MonoBehaviour
     {
         private bool m_Dragging = false;
+
+        /// <summary>
+        /// Defines this piece is placed in the correct position.
+        /// </summary>
         private bool m_Placed = false;
 
         private Vector2 m_Offset;
@@ -14,18 +22,22 @@ namespace Lindon.MiniGame.Puzzle
 
         private PuzzleSlot m_Slot;
 
-        public void Initialize(ref PuzzleSlot slot)
+        private float m_MinimumDistance;
+
+        /// <summary>
+        /// Initializes the puzzle piece with the given data and slot.
+        /// </summary>
+        /// <param name="data">The data for the puzzle piece.</param>
+        /// <param name="slot">The slot for the puzzle piece.</param>
+        public void Initialize(PieceData data, ref PuzzleSlot slot)
         {
             m_Slot = slot;
 
-            var data = GetData();
+            GetComponent<SpriteRenderer>().sprite = data.Sprite;
+            transform.localScale = data.Scale;
+            m_MinimumDistance = data.MinimumDistance;
 
             slot.SetPieceData(data);
-        }
-
-        private PuzzlePieceData GetData()
-        {
-            return new PuzzlePieceData();
         }
 
         private void Start()
@@ -60,7 +72,7 @@ namespace Lindon.MiniGame.Puzzle
         private void OnMouseUp()
         {
             Vector2 placedPosition;
-            if (Vector2.Distance(transform.position, m_Slot.transform.position) < 3)
+            if (Vector2.Distance(transform.position, m_Slot.transform.position) < m_MinimumDistance)
             {
                 placedPosition = m_Slot.transform.position;
                 m_Placed = true;
