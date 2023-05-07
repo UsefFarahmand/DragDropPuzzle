@@ -31,7 +31,7 @@ namespace Lindon.MiniGame.DragDropPuzzle
         {
             if (m_Slot != null)
             {
-                Gizmos.DrawCube(m_Slot.transform.position, Vector3.one * m_Data.MinimumDistance);
+                Gizmos.DrawWireSphere(m_Slot.transform.position, m_Data.MinimumDistance);
             }
         }
     }
