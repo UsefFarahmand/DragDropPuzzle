@@ -21,5 +21,18 @@ namespace Lindon.MiniGame.DragDropPuzzle
         {
             m_Piece.Initialize(m_Data, ref m_Slot);
         }
+
+        private void OnValidate()
+        {
+            m_Piece.Initialize(m_Data, ref m_Slot);
+        }
+
+        private void OnDrawGizmos()
+        {
+            if (m_Slot != null)
+            {
+                Gizmos.DrawCube(m_Slot.transform.position, Vector3.one * m_Data.MinimumDistance);
+            }
+        }
     }
 }
